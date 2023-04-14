@@ -71,3 +71,6 @@ README〜ER図作成：4/9 〆切
 
 ■画面遷移図（Figma）
 https://www.figma.com/file/fhJDMbi91ueEf3rxmaEmTm/%E7%AF%A0%E7%AC%9B%E7%B7%B4%E7%BF%92%E6%9B%B2%E8%87%AA%E5%8B%95%E4%BD%9C%E6%88%90?node-id=0%3A1&t=di5UDIsewVjW53vA-1
+
+■ER図
+https://drive.google.com/file/d/1bFvJ_c_y2OdY3c5GTIrvQ9yiU461HnXB/view?usp=sharing
