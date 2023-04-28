@@ -1,2 +1,25 @@
 <h1>Sheets#show</h1>
 <p>Find me in app/views/sheets/show.html.erb</p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= @sheet.title %>
+  </p>
+
+  <p>
+    <strong>Level:</strong>
+    <%= @sheet.level %>
+  </p>
+
+  <p>
+    <%= @sheet.comma_joined_mml %>
+  </p>
+
+<%= form_with model: @sheet, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
