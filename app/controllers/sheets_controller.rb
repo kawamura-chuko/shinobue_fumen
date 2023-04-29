@@ -10,9 +10,9 @@ class SheetsController < ApplicationController
 
   def update
     if @sheet.update(sheet_params)
-      redirect_to @sheet, notice: "Sheet was successfully updated."
+      redirect_to @sheet, success: t('.success')
     else
-      redirect_to @sheet, alert: "入力してください"
+      redirect_to @sheet, danger: @sheet.errors.full_messages.join(", ")
     end
   end
 
