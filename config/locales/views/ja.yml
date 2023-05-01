@@ -41,6 +41,9 @@ ja:
       no_result: '譜面がありません'
     show:
       title: '譜面詳細'
+    create:
+      success: '作成しました'
+      fail: '作成に失敗しました'
     update:
       success: '変更しました'
       fail: '変更に失敗しました'
