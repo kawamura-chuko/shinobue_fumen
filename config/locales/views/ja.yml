@@ -44,3 +44,5 @@ ja:
     update:
       success: '変更しました'
       fail: '変更に失敗しました'
+    destroy:
+      success: '削除しました'

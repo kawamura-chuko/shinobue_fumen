@@ -16,6 +16,11 @@ class SheetsController < ApplicationController
     end
   end
 
+  def destroy
+    @sheet.destroy!
+    redirect_to sheets_path, success: t('.success')
+  end
+
   private
 
   def set_sheet

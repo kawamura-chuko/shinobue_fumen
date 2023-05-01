@@ -1,4 +1,6 @@
-<h1>Sheets#show</h1>
+<%= link_to root_path do %>
+  <h1>Sheets#show</h1>
+<% end %>
 <p>Find me in app/views/sheets/show.html.erb</p>
 
   <p>
@@ -22,4 +24,16 @@
   </div>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
+<% msg = t('defaults.message.delete_confirm') %>
+<%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-danger", form: { onSubmit: "return check('#{msg}')" } %>
 
+<script>
+  function check(msg){
+    if(window.confirm(msg)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+</script>

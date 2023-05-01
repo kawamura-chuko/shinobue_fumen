@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
-      sheet: '掲示板'
+      sheet: '譜面'
     attributes:
       user:
         email: 'メールアドレス'
