@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>
+        <strong><%= @sheet.title %></strong>
+      </h2>
+      <p>
+        <strong>Level:</strong>
+        <%= @sheet.level %>
+      </p>
+      <%= form_with model: @sheet, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <%= f.hidden_field :level, value: @sheet.level %>
+        <%= f.hidden_field :comma_joined_mml, value: @sheet.comma_joined_mml %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="col-md-9">
+      <h1>譜面データ（仮）</h1>
+      <p>
+        <%= @sheet.comma_joined_mml %>
+      </p>
+    </div>
+  </div>
+</div>
