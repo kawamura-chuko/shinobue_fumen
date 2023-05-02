@@ -1,16 +1,9 @@
-<h1>Sheets#index</h1>
-<p>Find me in app/views/sheets/index.html.erb</p>
-
-<%= form_with(url: new_sheet_path, method: :get) do |form| %>
-  <%= form.select :level, options_for_select(@level, selected: Sheet::DEFAULT_LEVEL), {}, { class: 'form-control' } %>
-  <%= form.submit '曲を作成する', class: 'btn btn-primary' %>
-<% end %>
+<h1>譜面一覧</h1>
 
 <div id="sheets">
   <% @sheets.each do |sheet| %>
     <p>
-      <%= sheet.title %>
-      <%= link_to "Show this sheet", sheet %>
+      <%= link_to sheet.title, sheet %>
     </p>
   <% end %>
 </div>

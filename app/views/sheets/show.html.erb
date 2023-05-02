@@ -1,31 +1,31 @@
-<%= link_to root_path do %>
-  <h1>Sheets#show</h1>
-<% end %>
-<p>Find me in app/views/sheets/show.html.erb</p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= @sheet.title %>
-  </p>
-
-  <p>
-    <strong>Level:</strong>
-    <%= @sheet.level %>
-  </p>
-
-  <p>
-    <%= @sheet.comma_joined_mml %>
-  </p>
-
-<%= form_with model: @sheet, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>
+        <strong><%= @sheet.title %></strong>
+      </h2>
+      <p>
+        <strong>Level:</strong>
+        <%= @sheet.level %>
+      </p>
+      <%= form_with model: @sheet, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+      <% msg = t('defaults.message.delete_confirm') %>
+      <%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-danger", form: { onSubmit: "return check('#{msg}')" } %>
+    </div>
+    <div class="col-md-9">
+      <h1>譜面データ（仮）</h1>
+      <p>
+        <%= @sheet.comma_joined_mml %>
+      </p>
+    </div>
   </div>
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
-<% msg = t('defaults.message.delete_confirm') %>
-<%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-danger", form: { onSubmit: "return check('#{msg}')" } %>
+</div>
 
 <script>
   function check(msg){

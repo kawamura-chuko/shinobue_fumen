@@ -1,9 +1,9 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: %i[ show update destroy ]
+  before_action :set_types_of_selectable_levels
 
   def index
     @sheets = Sheet.all
-    @level = Sheet.types_of_selectable_levels
   end
 
   def new
@@ -43,6 +43,10 @@ class SheetsController < ApplicationController
 
   def level_params
     params.permit(:level)
+  end
+
+  def set_types_of_selectable_levels
+    @level = Sheet.types_of_selectable_levels
   end
 
   def set_sheet
