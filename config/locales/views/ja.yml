@@ -7,6 +7,9 @@ ja:
     show: '詳細'
     edit: '編集'
     delete: '削除'
+    audition: '試聴する'
+    play: '再生'
+    stop: '停止'
     password_reset: 'パスワードリセット'
     unspecified: '指定なし'
     message:

@@ -10,7 +10,7 @@ class SheetsController < ApplicationController
     @sheet = Sheet.new(level_params)
     # 自動作曲はまだ未実装のため、仮データを設定
     @sheet[:title] = '無題'
-    @sheet[:comma_joined_mml] = 'O5L4d,O4L4a,O4L8g,O4L8g'
+    @sheet[:comma_joined_mml] = 'L4O5d,L4O5d,L2O5e,L4O5d,L4O5d,L2O5e,L4O5d,L4O5e,L4O5f,L4O5e,L4O5d,L8O5e,L8O5d,L2O4b-'
   end
 
   def show
