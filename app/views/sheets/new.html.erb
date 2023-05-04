@@ -17,6 +17,10 @@
         <%= f.hidden_field :comma_joined_mml, value: @sheet.comma_joined_mml %>
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
+      <h1><%= t('defaults.audition') %></h1>
+      <button id="play-btn" type="button" class="btn btn-success btn-lg"><%= t('defaults.play') %></button>
+      <button id="stop-btn" type="button" class="btn btn-success"><%= t('defaults.stop') %></button>
+      <input type="hidden" id="sheet" value="<%= @sheet.comma_joined_mml %>">
     </div>
     <div class="col-md-9">
       <h1>譜面データ（仮）</h1>
