@@ -12,6 +12,8 @@ ja:
     stop: '停止'
     password_reset: 'パスワードリセット'
     unspecified: '指定なし'
+    level: 'レベル'
+    make_music: '曲を作成する'
     message:
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
