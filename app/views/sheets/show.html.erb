@@ -1,32 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <h2>
-        <strong><%= @sheet.title %></strong>
-      </h2>
-      <p>
-        <strong>Level:</strong>
-        <%= @sheet.level %>
-      </p>
+    <div class="col-md-12">
+      <%= render @sheet %>
       <%= form_with model: @sheet, local: true do |f| %>
         <div class="form-group">
           <%= f.label :title %>
           <%= f.text_field :title, class: 'form-control' %>
         </div>
-        <%= f.submit class: 'btn btn-primary' %>
+        <%= f.submit class: 'btn btn-outline-primary' %>
       <% end %>
       <% msg = t('defaults.message.delete_confirm') %>
-      <%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-danger", form: { onSubmit: "return check('#{msg}')" } %>
-      <h1><%= t('defaults.audition') %></h1>
-      <button id="play-btn" type="button" class="btn btn-success btn-lg"><%= t('defaults.play') %></button>
-      <button id="stop-btn" type="button" class="btn btn-success"><%= t('defaults.stop') %></button>
-      <input type="hidden" id="sheet" value="<%= @sheet.comma_joined_mml %>">
-    </div>
-    <div class="col-md-9">
-      <h1>譜面データ（仮）</h1>
-      <p>
-        <%= @sheet.comma_joined_mml %>
-      </p>
+      <%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-outline-danger btn-sm", form: { onSubmit: "return check('#{msg}')" } %>
     </div>
   </div>
 </div>

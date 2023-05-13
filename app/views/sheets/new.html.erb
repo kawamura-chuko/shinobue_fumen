@@ -1,13 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <h2>
-        <strong><%= @sheet.title %></strong>
-      </h2>
-      <p>
-        <strong>Level:</strong>
-        <%= @sheet.level %>
-      </p>
+    <div class="col-md-12">
+      <%= render @sheet %>
       <%= form_with model: @sheet, local: true do |f| %>
         <div class="form-group">
           <%= f.label :title %>
@@ -15,18 +9,8 @@
         </div>
         <%= f.hidden_field :level, value: @sheet.level %>
         <%= f.hidden_field :comma_joined_mml, value: @sheet.comma_joined_mml %>
-        <%= f.submit class: 'btn btn-primary' %>
+        <%= f.submit class: 'btn btn-outline-primary' %>
       <% end %>
-      <h1><%= t('defaults.audition') %></h1>
-      <button id="play-btn" type="button" class="btn btn-success btn-lg"><%= t('defaults.play') %></button>
-      <button id="stop-btn" type="button" class="btn btn-success"><%= t('defaults.stop') %></button>
-      <input type="hidden" id="sheet" value="<%= @sheet.comma_joined_mml %>">
-    </div>
-    <div class="col-md-9">
-      <h1>譜面データ（仮）</h1>
-      <p>
-        <%= @sheet.comma_joined_mml %>
-      </p>
     </div>
   </div>
 </div>
