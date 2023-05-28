@@ -8,9 +8,8 @@ class SheetsController < ApplicationController
 
   def new
     @sheet = Sheet.new(level_params)
-    # 自動作曲はまだ未実装のため、仮データを設定
     @sheet[:title] = '無題'
-    @sheet[:comma_joined_mml] = 'L4O5c,L4O5c,L2O5d,L4O5c,L4O5c,L2O5d,L4O5c,L4O5d,L4O5e-,L4O5d,L4O5c,L8O5d,L8O5c,L2O4a-,L4O4g,L4O4e-,L4O4g,L4O4a-,L4O4g,L8O4g,L8O4e-,L2O4d,L4O4g,L4O4a-,L8O5d,L8O5c,L4O4a-,L2O4g,L2O4g'
+    @sheet[:comma_joined_mml] = @sheet.make_music(@sheet[:level])
   end
 
   def show
