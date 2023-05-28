@@ -101,28 +101,6 @@ module ScaleInfo
           probability: 10,
         },
       ],
-      [
-        {
-          # 都節音階(レベル5)
-          last: [3, 8],
-          pitch: ["O3b-", "O4d", "O4e-", "O4g", "O4a", "O4b-", "O5d", "O5e-", "O5g", "O5a", "O5b-", "O6d", "O6e-"]
-        },
-        {
-          # 民謡音階(レベル5)
-          last: [1, 2, 6, 7, 11, 12],
-          pitch: ["O3b-", "O4c", "O4e-", "O4f", "O4g", "O4b-", "O5c", "O5e-", "O5f", "O5g", "O5b-", "O6c", "O6e-", "O6f"]
-        },
-        {
-          # 律音階(レベル5)
-          last: [2, 7, 12],
-          pitch: ["O4c", "O4d", "O4f", "O4g", "O4a", "O5c", "O5d", "O5f", "O5g", "O5a", "O6c", "O6d", "O6f"]
-        },
-        {
-          # 琉球音階(レベル5)
-          last: [0, 5, 10],
-          pitch: ["O3b-", "O4d", "O4e-", "O4f", "O4a", "O4b-", "O5d", "O5e-", "O5f", "O5a", "O5b-", "O6d", "O6e-", "O6f"]
-        },
-      ],
     ]
   end
 
