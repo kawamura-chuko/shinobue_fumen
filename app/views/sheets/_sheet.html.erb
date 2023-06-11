@@ -3,40 +3,42 @@
 <button id="stop-btn" type="button" class="btn btn-success"><%= t('defaults.stop') %></button>
 <input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
 
-<table class="table table-bordered">
-  <thead>
-    <tr class="table-info">
-      <th style="width: 12.5%" scope="col" colspan="2">1</th>
-      <th style="width: 12.5%" scope="col" colspan="2">2</th>
-      <th style="width: 12.5%" scope="col" colspan="2">3</th>
-      <th style="width: 12.5%" scope="col" colspan="2">4</th>
-      <th style="width: 12.5%" scope="col" colspan="2">5</th>
-      <th style="width: 12.5%" scope="col" colspan="2">6</th>
-      <th style="width: 12.5%" scope="col" colspan="2">7</th>
-      <th style="width: 12.5%" scope="col" colspan="2">8</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% beats = 0 %>
-      <% sheet.comma_joined_mml.split(',').each do |mml| %>
-        <% length = sheet.get_length(mml) %>
-        <% pitch = sheet.get_pitch(mml) %>
-        <% if length == 'L4' %>
-          <% beats += 1 %>
-          <td colspan='2' class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
-        <% elsif length == 'L8' %>
-          <% beats += 0.5 %>
-          <td class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
-        <% else %>
-          <% beats += 2 %>
-          <td colspan='4' class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
+<div id="note">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="table-info">
+        <th style="width: 12.5%" scope="col" colspan="2">1</th>
+        <th style="width: 12.5%" scope="col" colspan="2">2</th>
+        <th style="width: 12.5%" scope="col" colspan="2">3</th>
+        <th style="width: 12.5%" scope="col" colspan="2">4</th>
+        <th style="width: 12.5%" scope="col" colspan="2">5</th>
+        <th style="width: 12.5%" scope="col" colspan="2">6</th>
+        <th style="width: 12.5%" scope="col" colspan="2">7</th>
+        <th style="width: 12.5%" scope="col" colspan="2">8</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% beats = 0 %>
+        <% sheet.comma_joined_mml.split(',').each do |mml| %>
+          <% length = sheet.get_length(mml) %>
+          <% pitch = sheet.get_pitch(mml) %>
+          <% if length == 'L4' %>
+            <% beats += 1 %>
+            <td colspan='2' class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
+          <% elsif length == 'L8' %>
+            <% beats += 0.5 %>
+            <td class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
+          <% else %>
+            <% beats += 2 %>
+            <td colspan='4' class="fs-2"><%= sheet.decorate.get_pitch_char(pitch) %></td>
+          <% end %>
+          <% if beats == 8 %>
+            <% beats = 0 %>
+            </tr><tr>
+          <% end %>
         <% end %>
-        <% if beats == 8 %>
-          <% beats = 0 %>
-          </tr><tr>
-        <% end %>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+      </tr>
+    </tbody>
+  </table>
+</div>
