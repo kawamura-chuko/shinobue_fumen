@@ -1,4 +1,5 @@
 let context;
+let timerID = [];
 const tempo = 80;
 const yubiuchi = 0.05; // 指打ちの時間(秒)
 const volume = 0.2;
@@ -71,6 +72,10 @@ const uchi_notes = {
 };
 
 function playMusic(sheet) {
+  if (context) {
+    // 再生中は何もせずに終了
+    return;
+  }
   context = new AudioContext();
   const gainNode = context.createGain();
   gainNode.gain.value = volume;
@@ -83,12 +88,18 @@ function playMusic(sheet) {
   oscillator.start(0);
   let currentTime = context.currentTime;
 
+  const note = document.getElementById('note');
+  const td = note.getElementsByTagName('td');
+
+  timerID.splice(0)
+
   for (let i = 0; i < soundData.length; ++i) {
     const pitch_re = /O\d.+/g;
     const length_re = /L\d{1,2}/g;
     const pitch = soundData[i].match(pitch_re);
     const length = soundData[i].match(length_re);
     let time;
+    let tid;
 
     if (length[0] === "L4") {
       // 四分音符
@@ -107,7 +118,7 @@ function playMusic(sheet) {
     if ( ( i === ( soundData.length - 1 ) ) ||
          ( pitch[0] !== soundData[i + 1].match(pitch_re)[0] ) ) {
       oscillator.frequency.setValueAtTime(frequency, currentTime);
-      currentTime += time;  
+      currentTime += time;
     } else {
       // 次の音が同じ高さの場合は、指打ちをする
       oscillator.frequency.setValueAtTime(frequency, currentTime);
@@ -115,6 +126,30 @@ function playMusic(sheet) {
       oscillator.frequency.setValueAtTime(uchi_frequency, currentTime);
       currentTime += yubiuchi;
     }
+
+    if (i === 0) {
+      // 最初の音符を太い赤字にする
+      td[i].classList.add('text-danger');
+      td[i].classList.add('fw-bold');
+    };
+    if (i < ( soundData.length - 1 ) ) {
+      tid = setTimeout(function() {
+          // 2番目以降の音符を太い赤字にし、前の音符を元に戻す
+          td[i].classList.remove('text-danger');
+          td[i].classList.remove('fw-bold');
+          td[i+1].classList.add('text-danger');
+          td[i+1].classList.add('fw-bold');
+      }, currentTime * 1000);
+    } else {
+      tid = setTimeout(function() {
+          // 再生が終わったら音符のフォントを元に戻し、contextをクリア
+          td[i].classList.remove('text-danger');
+          td[i].classList.remove('fw-bold');
+          context.close();
+          context = null;
+      }, currentTime * 1000);
+    };
+    timerID.push(tid);
   }
 
   oscillator.stop(currentTime);
@@ -122,8 +157,20 @@ function playMusic(sheet) {
 
 function stopMusic() {
   if (context) {
+    // 再生停止してcontentをクリア
     context.close();
     context = null;
+
+    // 使用したタイマーを全て停止
+    timerID.forEach(tid => clearTimeout(tid));
+
+    // 音符のフォントを元に戻す
+    const note = document.getElementById('note');
+    const td = note.getElementsByTagName('td');
+    for (let i = 0; i < td.length; ++i) {
+      td[i].classList.remove('text-danger');
+      td[i].classList.remove('fw-bold');
+    }
   }
 }
 
