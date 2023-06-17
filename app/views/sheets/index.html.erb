@@ -1,9 +1,12 @@
-<h1>譜面一覧</h1>
+<div class="container">
+  <h1>譜面一覧</h1>
 
-<div id="sheets">
-  <% @sheets.each do |sheet| %>
-    <p>
-      <%= link_to sheet.title, sheet %>
-    </p>
-  <% end %>
+  <div id="sheets">
+    <% @sheets.each do |sheet| %>
+      <p>
+        <%= link_to sheet.title, sheet %>
+        <%= sheet.user.name %>
+      </p>
+    <% end %>
+  </div>
 </div>

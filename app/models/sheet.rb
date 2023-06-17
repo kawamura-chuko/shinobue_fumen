@@ -4,6 +4,8 @@ class Sheet < ApplicationRecord
   validates :level, presence: true
   validates :comma_joined_mml, presence: true, length: { maximum: 65_535 }
 
+  belongs_to :user
+
   DEFAULT_LEVEL = 2
   NUMBER_OF_BEATS_WHOLE_SONG = 28 # 曲全体の拍数(ただし二分音符は1つとする)
   NUMBER_OF_BEATS_BETWEEN_TWO_BARS = 7 # 2小節間の拍数(ただし二分音符は1つとする)
