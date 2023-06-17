@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: %i[ show update destroy ]
+  before_action :set_sheet, only: %i[ update destroy ]
   before_action :set_types_of_selectable_levels
 
   def index
@@ -13,10 +13,11 @@ class SheetsController < ApplicationController
   end
 
   def show
+    @sheet = Sheet.find(params[:id])
   end
 
   def create
-    @sheet = Sheet.new(sheet_params)
+    @sheet = current_user.sheets.build(sheet_params)
     if @sheet.save
       redirect_to @sheet, success: t('.success')
     else
@@ -49,7 +50,7 @@ class SheetsController < ApplicationController
   end
 
   def set_sheet
-    @sheet = Sheet.find(params[:id])
+    @sheet = current_user.sheets.find(params[:id])
   end
 
   def sheet_params
