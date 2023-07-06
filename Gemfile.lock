@@ -83,6 +83,8 @@ GEM
     debug (1.7.2)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dockerfile-rails (1.5.0)
+      rails
     draper (4.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -134,7 +136,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.14.3-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.14.3-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -221,12 +227,15 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
   cssbundling-rails (~> 1.1)
   debug
+  dockerfile-rails (>= 1.5)
   draper
   importmap-rails
   jbuilder
