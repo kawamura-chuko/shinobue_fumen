@@ -1,12 +1,27 @@
 <div class="container">
-  <h1>譜面一覧</h1>
+    <div class="fs-5 shadow p-3 mb-5 bg-body rounded">
+      <p>「曲を作成する」を押すと、指定レベルの練習曲を自動作成します。</p>
+      <ul class="fs-6">
+        <li>レベル1：呂音（低音域）のみ</li>
+        <li>レベル2：呂音（低音域）と甲音（高音域）</li>
+        <li>レベル3：メリ音（半音）「七×」「７×」</li>
+        <li>レベル4：メリ音（半音）「三×」「３×」「七×」「７×」</li>
+    </div>
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th scope="col"><%= t('.etude_list') %></th>
+          <th scope="col"><%= t('.user_name') %></th>
+        </tr>
+      </thead>
 
-  <div id="sheets">
-    <% @sheets.each do |sheet| %>
-      <p>
-        <%= link_to sheet.title, sheet %>
-        <%= sheet.user.name %>
-      </p>
-    <% end %>
-  </div>
+      <tbody>
+        <% @sheets.each do |sheet| %>
+          <tr>
+            <td><%= link_to sheet.title, sheet %></td>
+            <td><%= sheet.user.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>

@@ -1,6 +1,8 @@
 ja:
   defaults:
+    service_name: '篠笛練習曲自動作成'
     login: 'ログイン'
+    user_register: 'ユーザー登録'
     register: '登録'
     logout: 'ログアウト'
     post: '投稿'
@@ -44,6 +46,8 @@ ja:
     index:
       title: '譜面一覧'
       no_result: '譜面がありません'
+      etude_list: '登録練習曲一覧'
+      user_name: 'ユーザー名'
     show:
       title: '譜面詳細'
     create:
