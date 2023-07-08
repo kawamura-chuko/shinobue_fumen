@@ -1,27 +1,17 @@
 <header>
   <nav class='navbar navbar-expand-lg navigation navbar-light bg-white'>
-    <%= link_to root_path, class: 'navbar-brand' do %>
-      <%= image_tag 'logo.png' %>
-    <% end %>
-
-    <%= form_with(url: new_sheet_path, method: :get) do |form| %>
-      <div class="row">
-        <div class="col">
-          <%= form.select :level, options_for_select(@level, selected: Sheet::DEFAULT_LEVEL), {}, { class: 'form-control' } %>
-        </div>
-        <div class="col">
-          <%= form.submit t('defaults.make_music'), class: 'btn btn-primary btn-lg' %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'shared/common' %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto main-nav align-items-center">
+      <ul class="navbar-nav ms-auto main-nav align-items-center">
         <li class="nav-item">
-          <%= link_to 'ログイン', login_path ,class: 'nav-link' %>
+          <%= link_to t('defaults.login'), login_path ,class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('defaults.user_register'), new_user_path ,class: 'nav-link' %>
         </li>
       </ul>
     </div>

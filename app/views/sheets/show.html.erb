@@ -1,21 +1,17 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <%= render @sheet %>
-      <h5>投稿者：<%= @sheet.user.name %></h5>
-      <% if logged_in? && current_user.own?(@sheet) %>
-        <%= form_with model: @sheet, local: true do |f| %>
-          <div class="form-group">
-            <%= f.label :title %>
-            <%= f.text_field :title, class: 'form-control' %>
-          </div>
-          <%= f.submit class: 'btn btn-outline-primary' %>
-        <% end %>
-        <% msg = t('defaults.message.delete_confirm') %>
-        <%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-outline-danger btn-sm", form: { onSubmit: "return check('#{msg}')" } %>
-      <% end %>
-    </div>
-  </div>
+  <%= render @sheet %>
+  <p class="fst-italic fs-5"><%= @sheet.user.name %></p>
+  <% if logged_in? && current_user.own?(@sheet) %>
+    <%= form_with model: @sheet, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <%= f.submit class: 'btn btn-outline-primary' %>
+    <% end %>
+    <% msg = t('defaults.message.delete_confirm') %>
+    <%= button_to t('defaults.delete'), sheet_path(@sheet), method: :delete, class: "btn btn-outline-danger btn-sm", form: { onSubmit: "return check('#{msg}')" } %>
+  <% end %>
 </div>
 
 <script>
