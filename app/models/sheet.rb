@@ -20,8 +20,7 @@ class Sheet < ApplicationRecord
   end
 
   def self.types_of_selectable_levels
-    # {'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4, 'レベル5': 5}
-    {'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4}
+    {'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4, 'レベル5': 5}
   end
 
   def get_length(mml)

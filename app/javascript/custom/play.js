@@ -1,6 +1,5 @@
 let context;
 let timerID = [];
-const tempo = 80;
 const yubiuchi = 0.05; // 指打ちの時間(秒)
 const volume = 0.2;
 
@@ -29,12 +28,11 @@ const notes = {
   "O5g":  792,     // ６
   "O5a-": 836,     // ７x
   "O5a":  888,     // ７
-  "O5b-": 939,     // ８x(未使用)
-  "O5b":  997,     // ８(大甲)
-  "O6c":  528 * 2, // ２(大甲)
-  "O6d":  594 * 2, // ３(大甲)
-  "O6e-": 627 * 2, // ４(大甲)
-  "O6f":  704 * 2, // ５(大甲)
+  "O5b-": 939,     // ８(大甲)
+  "O6c":  528 * 2, // ２(大甲)(未使用)
+  "O6d":  594 * 2, // ３(大甲)(未使用)
+  "O6e-": 627 * 2, // ４(大甲)(未使用)
+  "O6f":  704 * 2, // ５(大甲)(未使用)
   "O6g":  792 * 2, // (未使用)
 };
 const uchi_notes = {
@@ -62,12 +60,11 @@ const uchi_notes = {
   "O5g":  888,     // ６
   "O5a-": 888,     // ７x
   "O5a":  792,     // ７
-  "O5b-": 888,     // ８x(未使用)
-  "O5b":  888,     // ８(大甲)
-  "O6c":  0,       // ２(大甲)
-  "O6d":  0,       // ３(大甲)
-  "O6e-": 0,       // ４(大甲)
-  "O6f":  0,       // ５(大甲)
+  "O5b-": 888,     // ８(大甲)
+  "O6c":  0,       // ２(大甲)(未使用)
+  "O6d":  0,       // ３(大甲)(未使用)
+  "O6e-": 0,       // ４(大甲)(未使用)
+  "O6f":  0,       // ５(大甲)(未使用)
   "O6g":  0,       // (未使用)
 };
 
@@ -76,6 +73,7 @@ function playMusic(sheet) {
     // 再生中は何もせずに終了
     return;
   }
+  const tempo = document.getElementById('tempo').value
   context = new AudioContext();
   const gainNode = context.createGain();
   gainNode.gain.value = volume;
