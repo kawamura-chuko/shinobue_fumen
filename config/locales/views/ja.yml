@@ -15,6 +15,7 @@ ja:
     password_reset: 'パスワードリセット'
     unspecified: '指定なし'
     level: 'レベル'
+    tempo: 'テンポ'
     make_music: '曲を作成する'
     message:
       require_login: 'ログインしてください'
