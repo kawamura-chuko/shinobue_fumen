@@ -1,6 +1,6 @@
 <div class="container">
   <%= render @sheet %>
-  <p class="fst-italic fs-5"><%= @sheet.user.name %></p>
+  <p class="fst-italic text-end"><%= @sheet.created_at.strftime('%Y/%m/%d') %> : <%= @sheet.user.name %></p>
   <% if logged_in? && current_user.own?(@sheet) %>
     <%= form_with model: @sheet, local: true do |f| %>
       <div class="form-group">
