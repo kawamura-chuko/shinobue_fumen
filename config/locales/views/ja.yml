@@ -17,6 +17,9 @@ ja:
     level: 'レベル'
     tempo: 'テンポ'
     make_music: '曲を作成する'
+    terms_of_use: '利用規約'
+    privacy_policy: 'プライバシーポリシー'
+    contact_us: 'お問合せフォーム'
     message:
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
@@ -36,7 +39,7 @@ ja:
   user_sessions:
     new:
       title: 'ログイン'
-      to_register_page: '登録ページへ'
+      to_register_page: 'ユーザー登録ページへ'
       password_forget: 'パスワードをお忘れの方はこちら'
     create:
       success: 'ログインしました'
@@ -48,7 +51,6 @@ ja:
       title: '譜面一覧'
       no_result: '譜面がありません'
       etude_list: '登録練習曲一覧'
-      user_name: 'ユーザー名'
     show:
       title: '譜面詳細'
     create:

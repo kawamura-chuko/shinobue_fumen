@@ -8,9 +8,10 @@ ja:
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
-        last_name: '姓'
-        first_name: '名'
+        name: '名前'
       sheet:
         title: 'タイトル'
         user: '投稿者'
         level: 'レベル'
+        created_at: '作成日時'
+        updated_at: '更新日時'

@@ -60,8 +60,9 @@ end
 
 
 gem "cssbundling-rails", "~> 1.1"
-gem 'rails-i18n'
 gem 'draper'
+gem 'high_voltage'
+gem 'rails-i18n'
 gem 'sorcery'
 
 gem "dockerfile-rails", ">= 1.5", :group => :development

@@ -100,6 +100,7 @@ GEM
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
+    high_voltage (3.1.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -237,6 +238,7 @@ DEPENDENCIES
   debug
   dockerfile-rails (>= 1.5)
   draper
+  high_voltage
   importmap-rails
   jbuilder
   pg (~> 1.1)
