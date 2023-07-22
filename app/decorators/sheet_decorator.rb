@@ -10,67 +10,39 @@ class SheetDecorator < ApplicationDecorator
   #     end
   #   end
 
+  PITCH_CHAR = {
+    'O3b-' => '一',
+    'O3b' => '二x',
+    'O4c' => '二',
+    'O4d-' => '三x',
+    'O4d' => '三',
+    'O4e-' => '四',
+    'O4e' => '五x',
+    'O4f' => '五',
+    'O4g-' => '六x',
+    'O4g' => '六',
+    'O4a-' => '七x',
+    'O4a' => '七',
+    'O4b-' => '１',
+    'O4b' => '２x',
+    'O5c' => '２',
+    'O5d-' => '３x',
+    'O5d' => '３',
+    'O5e-' => '４',
+    'O5e' => '５x',
+    'O5f' => '５',
+    'O5g-' => '６x',
+    'O5g' => '６',
+    'O5a-' => '７x',
+    'O5a' => '７',
+    'O5b-' => '８',
+    'O6c' => '②',
+    'O6d' => '③',
+    'O6e-' => '④',
+    'O6f' => '⑤'
+  }.freeze
+
   def get_pitch_char(pitch)
-    # binding.break
-    case pitch
-    when "O3b-" then
-      "一"
-    when "O3b" then
-      "二x"
-    when "O4c" then
-      "二"
-    when "O4d-" then
-      "三x"
-    when "O4d" then
-      "三"
-    when "O4e-" then
-      "四"
-    when "O4e" then
-      "五x"
-    when "O4f" then
-      "五"
-    when "O4g-" then
-      "六x"
-    when "O4g" then
-      "六"
-    when "O4a-" then
-      "七x"
-    when "O4a" then
-      "七"
-    when "O4b-" then
-      "１"
-    when "O4b" then
-      "２x"
-    when "O5c" then
-      "２"
-    when "O5d-" then
-      "３x"
-    when "O5d" then
-      "３"
-    when "O5e-" then
-      "４"
-    when "O5e" then
-      "５x"
-    when "O5f" then
-      "５"
-    when "O5g-" then
-      "６x"
-    when "O5g" then
-      "６"
-    when "O5a-" then
-      "７x"
-    when "O5a" then
-      "７"
-    when "O5b-" then
-      "８"
-    when "O6c" then
-      "②"
-    when "O6d" then
-      "③"
-    when "O6e-" then
-      "④"
-    when "O6f" then
-      "⑤"
-    end
+    PITCH_CHAR[pitch]
   end
 end
