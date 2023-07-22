@@ -15,12 +15,12 @@ class Sheet < ApplicationRecord
     @pitch_history_data = {
       value: 0,
       old1: 0,
-      old2: 0,
+      old2: 0
     }
   end
 
   def self.types_of_selectable_levels
-    {'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4, 'レベル5': 5}
+    { 'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4, 'レベル5': 5 }
   end
 
   def get_length(mml)
@@ -43,7 +43,7 @@ class Sheet < ApplicationRecord
       pitch = determine_pitch(i, scale_info)
       array_data.push("#{length}#{pitch}")
       if length == 'L8'
-        pitch = determine_pitch(i ,scale_info)
+        pitch = determine_pitch(i, scale_info)
         array_data.push("#{length}#{pitch}")
       end
     end
@@ -53,32 +53,48 @@ class Sheet < ApplicationRecord
   private
 
   def determine_pitch(beat, scale_info)
-    max_pitch = scale_info[:pitch].length - 1
-    min_pitch = 0
-    if beat % NUMBER_OF_BEATS_BETWEEN_TWO_BARS == 0
-      if beat == 0
-        # 曲の一番最後の音
-        num = rand(0..scale_info[:last].length - 1)
-        value = scale_info[:last][num]
-        pitch = scale_info[:pitch][value]
-        update_pitch_history_data(value, value, value)
-      else
-        # 2小節毎での一番最後の音
-        max_val = @pitch_history_data[:old1] + WIDTH_OF_PITCH_CHANGE
-        min_val = @pitch_history_data[:old1] - WIDTH_OF_PITCH_CHANGE
-        max_val = max_pitch if max_val > max_pitch
-        min_val = min_pitch if min_val < min_pitch
-        value = rand(min_val..max_val)
-        pitch = scale_info[:pitch][value]
-        update_pitch_history_data(value, value, value)
-      end
+    if (beat % NUMBER_OF_BEATS_BETWEEN_TWO_BARS).zero?
+      value = if beat.zero?
+                # 曲の一番最後の音
+                get_pitch_value_last(scale_info)
+              else
+                # 2小節毎での一番最後の音
+                get_pitch_value_delimit(scale_info)
+              end
+      update_pitch_history_data(value, value, value)
     else
-      probability = make_probability(@pitch_history_data[:old1], @pitch_history_data[:old2], max_pitch, min_pitch)
-      value = move_pitch(@pitch_history_data[:value], probability)
-      pitch = scale_info[:pitch][value]
+      value = get_pitch_value(scale_info)
       update_pitch_history_data(value, value, @pitch_history_data[:old1])
     end
-    pitch
+    scale_info[:pitch][value]
+  end
+
+  def get_pitch_value(scale_info)
+    max_pitch = scale_info[:pitch].length - 1
+    min_pitch = 0
+    probability = make_probability(@pitch_history_data[:old1], @pitch_history_data[:old2], max_pitch, min_pitch)
+    move_pitch(@pitch_history_data[:value], probability)
+  end
+
+  def get_pitch_value_last(scale_info)
+    num = rand(0..scale_info[:last].length - 1)
+    scale_info[:last][num]
+  end
+
+  def get_pitch_value_delimit(scale_info)
+    max_pitch = scale_info[:pitch].length - 1
+    min_pitch = 0
+    max_val = if @pitch_history_data[:old1] + WIDTH_OF_PITCH_CHANGE < max_pitch
+                @pitch_history_data[:old1] + WIDTH_OF_PITCH_CHANGE
+              else
+                max_pitch
+              end
+    min_val = if @pitch_history_data[:old1] - WIDTH_OF_PITCH_CHANGE > min_pitch
+                @pitch_history_data[:old1] - WIDTH_OF_PITCH_CHANGE
+              else
+                min_pitch
+              end
+    rand(min_val..max_val)
   end
 
   def update_pitch_history_data(value, old1, old2)
@@ -117,9 +133,9 @@ class Sheet < ApplicationRecord
     if old1_value > old2_value
       return 70, 10, 20
     end
-    if old1_value < old2_value
-      return 20, 10, 70
-    end
+    return unless old1_value < old2_value
+
+    [20, 10, 70]
   end
 
   def move_pitch(value, probability)
@@ -135,9 +151,9 @@ class Sheet < ApplicationRecord
   end
 
   def determine_length(beat)
-    if beat % NUMBER_OF_BEATS_BETWEEN_TWO_BARS == 0
+    if (beat % NUMBER_OF_BEATS_BETWEEN_TWO_BARS).zero?
       # 2小節の終わりは二分音符とする
-      "L2"
+      'L2'
     else
       make_length
     end

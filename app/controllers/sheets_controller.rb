@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: %i[ update destroy ]
+  before_action :set_sheet, only: %i[update destroy]
 
   def index
     @sheets = Sheet.all
@@ -20,7 +20,7 @@ class SheetsController < ApplicationController
     if @sheet.save
       redirect_to @sheet, success: t('.success')
     else
-      flash.now['danger'] = @sheet.errors.full_messages.join(", ")
+      flash.now['danger'] = @sheet.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -29,7 +29,7 @@ class SheetsController < ApplicationController
     if @sheet.update(sheet_params)
       redirect_to @sheet, success: t('.success')
     else
-      redirect_to @sheet, danger: @sheet.errors.full_messages.join(", ")
+      redirect_to @sheet, danger: @sheet.errors.full_messages.join(', ')
     end
   end
 
