@@ -12,6 +12,7 @@ ja:
     audition: '試聴する'
     play: '再生'
     stop: '停止'
+    untitled: '無題'
     password_reset: 'パスワードリセット'
     unspecified: '指定なし'
     level: 'レベル'
