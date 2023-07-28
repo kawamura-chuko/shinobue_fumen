@@ -64,6 +64,7 @@ end
 gem 'cssbundling-rails', '~> 1.1'
 gem 'draper'
 gem 'high_voltage'
+gem 'meta-tags'
 gem 'rails-i18n'
 gem 'sorcery'
 
