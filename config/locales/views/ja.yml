@@ -62,3 +62,8 @@ ja:
       fail: '変更に失敗しました'
     destroy:
       success: '削除しました'
+  profiles:
+    show:
+      title: '登録情報'
+    edit:
+      title: '登録情報編集'

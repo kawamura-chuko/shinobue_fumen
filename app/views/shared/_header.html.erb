@@ -12,6 +12,7 @@
             <%= current_user.name %>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to (t 'profiles.show.title'), profile_path, class: "nav-link text-black-50" %>
             <%= button_to t('defaults.logout'), logout_path, method: :delete, class: "btn btn-link nav-link" %>
           </ul>
         </li>
