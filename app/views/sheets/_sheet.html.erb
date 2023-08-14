@@ -1,12 +1,12 @@
 <h2><%= sheet.title %>(<%= t('defaults.level') %><%= sheet.level %>)</h2>
-<button id="play-btn" type="button" class="btn btn-success btn-lg"><%= t('defaults.play') %></button>
-<button id="stop-btn" type="button" class="btn btn-success"><%= t('defaults.stop') %></button>
+<button id="play-btn" type="button" class="btn btn-primary btn-lg bi bi-play-btn-fill"><%= t('defaults.play') %></button>
+<button id="stop-btn" type="button" class="btn btn-primary bi bi-stop-btn-fill"><%= t('defaults.stop') %></button>
 <input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
 
 <div id="note">
   <table class="table table-bordered text-nowrap">
     <thead>
-      <tr class="table-info">
+      <tr class="table-success">
         <th style="width: 12.5%" scope="col" colspan="2">1</th>
         <th style="width: 12.5%" scope="col" colspan="2">2</th>
         <th style="width: 12.5%" scope="col" colspan="2">3</th>
