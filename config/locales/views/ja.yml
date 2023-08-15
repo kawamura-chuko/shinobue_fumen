@@ -18,6 +18,7 @@ ja:
     level: 'レベル'
     tempo: 'テンポ'
     make_music: '曲を作成する'
+    make_music_again: '曲を再度作成する'
     terms_of_use: '利用規約'
     privacy_policy: 'プライバシーポリシー'
     contact_us: 'お問合せフォーム'

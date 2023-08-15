@@ -1,47 +1,58 @@
 <div class="container">
-    <div class="shadow p-3 mb-5 bg-body rounded">
-      <p class="fs-5">「曲を作成する」を押すと、指定レベルの練習曲を自動作成します。</p>
-      <ul class="fs-6">
-        <li>レベル1：呂音（低音域）のみ</li>
-        <li>レベル2：呂音（低音域）と甲音（高音域）</li>
-        <li>レベル3：メリ音（半音）「七×」「７×」</li>
-        <li>レベル4：メリ音（半音）「三×」「３×」「七×」「７×」</li>
-        <li>レベル5：メリ音（半音）「二×」「２×」「三×」「３×」「五×」「５×」「六×」「６×」「七×」「７×」</li>
-      </ul>
+  <%= form_with(url: new_sheet_path, method: :get) do |form| %>
+    <div class="row">
+      <div class="col-3">
+        <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
+        <%= form.select :level, options_for_select(Sheet.types_of_selectable_levels, selected: level), {}, { class: 'form-control form-control-lg' } %>
+      </div>
+      <div class="col-1">
+        <%= form.submit t('defaults.make_music'), class: 'btn btn-primary btn-lg' %>
+      </div>
     </div>
-    <div class="shadow p-3 mb-5 bg-body rounded">
-      <p class="fs-5">作成した練習曲は、六本調子のドレミ調の篠笛とほぼ同じ音程で再生できます。</p>
-      <ul class="fs-6">
-        <li>ソルフェジオ周波数を含む音を使用しています（甲音２の音を528Hzに調整）</li>
-        <li>テンポを変更できます（♩=20〜200）（再生中は変更できません）</li>
-      </ul>
-    </div>
-    <div class="shadow p-3 mb-5 bg-body rounded">
-      <p class="fs-5">ユーザー登録するとできること</p>
-      <ul class="fs-6">
-        <li>作成した練習曲の保存（気になる曲が出来たら是非保存していただきたいです）</li>
-        <li>練習曲に対するコメントの投稿や、音声/動画をアップロードできる機能を、今後追加予定です。</li>
-      </ul>
-    </div>
-    <table class="table">
-      <thead class="table-light">
-        <tr>
-          <th scope="col"><%= t('.etude_list') %></th>
-          <th scope="col"><%= Sheet.human_attribute_name(:level) %></th>
-          <th scope="col"><%= User.human_attribute_name(:name) %></th>
-          <th scope="col"><%= Sheet.human_attribute_name(:created_at) %></th>
-        </tr>
-      </thead>
+  <% end %>
+  <div class="shadow p-3 mb-5 bg-body rounded">
+    <p class="fs-5">「曲を作成する」を押すと、指定レベルの練習曲を自動作成します。</p>
+    <ul class="fs-6">
+      <li>レベル1：呂音（低音域）のみ</li>
+      <li>レベル2：呂音（低音域）と甲音（高音域）</li>
+      <li>レベル3：メリ音（半音）「七×」「７×」</li>
+      <li>レベル4：メリ音（半音）「三×」「３×」「七×」「７×」</li>
+      <li>レベル5：メリ音（半音）「二×」「２×」「三×」「３×」「五×」「５×」「六×」「６×」「七×」「７×」</li>
+    </ul>
+  </div>
+  <div class="shadow p-3 mb-5 bg-body rounded">
+    <p class="fs-5">作成した練習曲は、六本調子のドレミ調の篠笛とほぼ同じ音程で再生できます。</p>
+    <ul class="fs-6">
+      <li>ソルフェジオ周波数を含む音を使用しています（甲音２の音を528Hzに調整）</li>
+      <li>テンポを変更できます（♩=20〜200）（再生中は変更できません）</li>
+    </ul>
+  </div>
+  <div class="shadow p-3 mb-5 bg-body rounded">
+    <p class="fs-5">ユーザー登録するとできること</p>
+    <ul class="fs-6">
+      <li>作成した練習曲の保存（気になる曲が出来たら是非保存していただきたいです）</li>
+      <li>練習曲に対するコメントの投稿や、音声/動画をアップロードできる機能を、今後追加予定です。</li>
+    </ul>
+  </div>
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th scope="col"><%= t('.etude_list') %></th>
+        <th scope="col"><%= Sheet.human_attribute_name(:level) %></th>
+        <th scope="col"><%= User.human_attribute_name(:name) %></th>
+        <th scope="col"><%= Sheet.human_attribute_name(:created_at) %></th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <% @sheets.each do |sheet| %>
-          <tr>
-            <td><%= link_to sheet.title, sheet %></td>
-            <td><%= sheet.level %></td>
-            <td><%= sheet.user.name %></td>
-            <td><%= sheet.created_at.strftime('%Y/%m/%d') %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <tbody>
+      <% @sheets.reverse_each do |sheet| %>
+        <tr>
+          <td><%= link_to sheet.title, sheet %></td>
+          <td><%= sheet.level %></td>
+          <td><%= sheet.user.name %></td>
+          <td><%= sheet.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
