@@ -1,7 +1,23 @@
 <h2><%= sheet.title %>(<%= t('defaults.level') %><%= sheet.level %>)</h2>
-<button id="play-btn" type="button" class="btn btn-primary btn-lg bi bi-play-btn-fill"><%= t('defaults.play') %></button>
-<button id="stop-btn" type="button" class="btn btn-primary bi bi-stop-btn-fill"><%= t('defaults.stop') %></button>
-<input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
+
+<%= form_with(url: new_sheet_path, method: :get) do |form| %>
+  <div class="d-flex align-items-center">
+    <div>
+      <button id="play-btn" type="button" class="btn btn-primary btn-lg bi bi-play-btn-fill"><%= t('defaults.play') %></button>
+    </div>
+    <div>
+      <button id="stop-btn" type="button" class="btn btn-primary bi bi-stop-btn-fill"><%= t('defaults.stop') %></button>
+    </div>
+    <input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
+    <div class="ms-auto">
+      <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
+      <%= form.select :level, options_for_select(Sheet.types_of_selectable_levels, selected: level), {}, { class: 'form-control form-control-lg' } %>
+    </div>
+    <div>
+      <%= form.submit t('defaults.make_music_again'), class: 'btn btn-primary btn-lg' %>
+    </div>
+  </div>
+<% end %>
 
 <div id="note">
   <table class="table table-bordered text-nowrap">
