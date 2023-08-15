@@ -45,7 +45,7 @@
     </thead>
 
     <tbody>
-      <% @sheets.each do |sheet| %>
+      <% @sheets.reverse_each do |sheet| %>
         <tr>
           <td><%= link_to sheet.title, sheet %></td>
           <td><%= sheet.level %></td>
