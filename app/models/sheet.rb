@@ -5,6 +5,7 @@ class Sheet < ApplicationRecord
   validates :comma_joined_mml, presence: true, length: { maximum: 65_535 }
 
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   DEFAULT_LEVEL = 2
   NUMBER_OF_BEATS_WHOLE_SONG = 28 # 曲全体の拍数(ただし二分音符は1つとする)

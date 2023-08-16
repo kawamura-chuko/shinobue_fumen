@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   resources :users, only: %i[new create]
-  resources :sheets
+  resources :sheets do
+    resources :comments, only: %i[create destroy], shallow: true
+  end
   resource :profile, only: %i[show edit update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

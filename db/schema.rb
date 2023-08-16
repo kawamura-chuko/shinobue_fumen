@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_17_002038) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_15_100748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "embed_type", default: 0, null: false
+    t.string "identifier"
+    t.string "audio"
+    t.string "video"
+    t.bigint "user_id", null: false
+    t.bigint "sheet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sheet_id"], name: "index_comments_on_sheet_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "sheets", force: :cascade do |t|
     t.string "title", null: false
@@ -35,5 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_002038) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "sheets"
+  add_foreign_key "comments", "users"
   add_foreign_key "sheets", "users"
 end
