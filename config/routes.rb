@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :sheets do
-    resources :comments, only: %i[create destroy], shallow: true
+    resources :comments, only: %i[create destroy edit update], shallow: true
   end
   resource :profile, only: %i[show edit update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
