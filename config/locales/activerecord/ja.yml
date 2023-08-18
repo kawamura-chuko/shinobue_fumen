@@ -3,6 +3,7 @@ ja:
     models:
       user: 'ユーザー'
       sheet: '譜面'
+      comment: 'コメント'
     attributes:
       user:
         email: 'メールアドレス'
@@ -15,3 +16,5 @@ ja:
         level: 'レベル'
         created_at: '作成日時'
         updated_at: '更新日時'
+      comment:
+        body: 'コメント'

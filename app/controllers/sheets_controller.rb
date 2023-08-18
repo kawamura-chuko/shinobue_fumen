@@ -13,6 +13,8 @@ class SheetsController < ApplicationController
 
   def show
     @sheet = Sheet.find(params[:id])
+    @comment = Comment.new
+    @comments = @sheet.comments.includes(:user).order(created_at: :desc)
   end
 
   def create

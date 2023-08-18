@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
 
   has_many :sheets, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def own?(object)
     id == object.user_id
