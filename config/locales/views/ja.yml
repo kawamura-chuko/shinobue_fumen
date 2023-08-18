@@ -22,6 +22,7 @@ ja:
     terms_of_use: '利用規約'
     privacy_policy: 'プライバシーポリシー'
     contact_us: 'お問合せフォーム'
+    comment_count: 'コメント数'
     message:
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
