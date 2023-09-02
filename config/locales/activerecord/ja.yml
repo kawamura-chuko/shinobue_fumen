@@ -18,3 +18,10 @@ ja:
         updated_at: '更新日時'
       comment:
         body: 'コメント'
+        identifier: 'ID'
+        embed_type: '埋め込みタイプ'
+  enums:
+    comment:
+      embed_type:
+        not_embed: '無し'
+        youtube: 'YouTube'

@@ -31,7 +31,11 @@
     <p class="fs-5">ユーザー登録するとできること</p>
     <ul class="fs-6">
       <li>作成した練習曲の保存（気になる曲が出来たら是非保存していただきたいです）</li>
-      <li>練習曲に対するコメントの投稿や、音声/動画をアップロードできる機能を、今後追加予定です。</li>
+      <li>
+        練習曲に対するコメントの投稿、YouTube動画の投稿（
+        <i class="text-danger bi bi-youtube"></i>
+        が付いている曲にYouTube動画の投稿があります）
+      </li>
     </ul>
   </div>
   <table class="table">
@@ -50,7 +54,12 @@
         <tr>
           <td><%= link_to sheet.title, sheet %></td>
           <td><%= sheet.level %></td>
-          <td><%= sheet.comments.count %></td>
+          <td>
+            <%= sheet.comments.count %>
+            <% if sheet.comments.exists?(embed_type: 'youtube') %>
+              <i class="text-danger bi bi-youtube"></i>
+            <% end %>
+          </td>
           <td><%= sheet.user.name %></td>
           <td><%= sheet.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
