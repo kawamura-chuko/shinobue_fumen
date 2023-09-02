@@ -18,3 +18,17 @@ ja:
         updated_at: '更新日時'
       comment:
         body: 'コメント'
+        identifier: 'ID'
+        embed_type: '埋め込みタイプ'
+  enums:
+    comment:
+      embed_type:
+        not_embed: '無し'
+        youtube: 'YouTube'
+    sheet:
+      level:
+        level1: 'レベル1'
+        level2: 'レベル2'
+        level3: 'レベル3'
+        level4: 'レベル4'
+        level5: 'レベル5'

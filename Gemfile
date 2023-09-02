@@ -62,6 +62,7 @@ group :development do
 end
 
 gem 'cssbundling-rails', '~> 1.1'
+gem 'enum_help'
 gem 'draper'
 gem 'high_voltage'
 gem 'meta-tags'

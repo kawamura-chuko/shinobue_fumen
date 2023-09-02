@@ -1,4 +1,4 @@
-<h2><%= sheet.title %>(<%= t('defaults.level') %><%= sheet.level %>)</h2>
+<h2><%= sheet.title %>(<%= sheet.level_i18n %>)</h2>
 
 <%= form_with(url: new_sheet_path, method: :get) do |form| %>
   <div class="d-flex align-items-center">
@@ -11,7 +11,7 @@
     <input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
     <div class="ms-auto">
       <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
-      <%= form.select :level, options_for_select(Sheet.types_of_selectable_levels, selected: level), {}, { class: 'form-control form-control-lg' } %>
+      <%= form.select :level, Sheet.levels_i18n.invert, { selected: level }, { class: 'form-control form-control-lg' } %>
     </div>
     <div>
       <%= form.submit t('defaults.make_music_again'), class: 'btn btn-primary btn-lg' %>

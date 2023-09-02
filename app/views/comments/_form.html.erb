@@ -1,0 +1,15 @@
+<div class="row mb-3">
+  <div class="col-lg-8 offset-lg-2">
+    <%= form_with model: comment, url: [sheet, comment], local: true do |f| %>
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control mb-3', row: 4, placeholder: Comment.human_attribute_name(:body) %>
+      <%= f.label :embed_type %>
+      <%= f.select :embed_type, Comment.embed_types_i18n.invert, {}, class: 'form-control' %>
+      <%= f.label :identifier %>
+      <%= f.text_field :identifier, class: 'form-control' %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <p>YouTube動画を投稿する場合は、埋め込みタイプに「YouTube」を選択し、IDにYouTubeのURLを入力してください（コメント欄の記載も必須となります）</p>
+      <%= f.submit t('defaults.post'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

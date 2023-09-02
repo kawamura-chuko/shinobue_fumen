@@ -7,7 +7,10 @@ class Sheet < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  DEFAULT_LEVEL = 2
+  enum level: { level1: 1, level2: 2, level3: 3, level4: 4, level5: 5 }
+
+  DEFAULT_LEVEL_VALUE = 2
+  DEFAULT_LEVEL = Sheet.levels.key(DEFAULT_LEVEL_VALUE)
   NUMBER_OF_BEATS_WHOLE_SONG = 28 # 曲全体の拍数(ただし二分音符は1つとする)
   NUMBER_OF_BEATS_BETWEEN_TWO_BARS = 7 # 2小節間の拍数(ただし二分音符は1つとする)
   WIDTH_OF_PITCH_CHANGE = 3 # 2小節単位での音の高さの変化の幅
@@ -18,10 +21,6 @@ class Sheet < ApplicationRecord
       old1: 0,
       old2: 0
     }
-  end
-
-  def self.types_of_selectable_levels
-    { 'レベル1': 1, 'レベル2': 2, 'レベル3': 3, 'レベル4': 4, 'レベル5': 5 }
   end
 
   def get_length(mml)

@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     if comment.save
       redirect_to sheet_path(comment.sheet), success: t('defaults.message.created', item: Comment.model_name.human)
     else
-      redirect_to sheet_path(comment.sheet), danger: t('defaults.message.not_created', item: Comment.model_name.human)
+      redirect_to sheet_path(comment.sheet), danger: t('defaults.message.not_created', item: Comment.model_name.human) + "(#{comment.errors.full_messages.join(', ')})"
     end
   end
 
@@ -33,10 +33,10 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body).merge(sheet_id: params[:sheet_id])
+    params.require(:comment).permit(:body, :embed_type, :identifier).merge(sheet_id: params[:sheet_id])
   end
 
   def comment_update_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :embed_type, :identifier)
   end
 end
