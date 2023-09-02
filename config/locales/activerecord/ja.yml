@@ -25,3 +25,10 @@ ja:
       embed_type:
         not_embed: '無し'
         youtube: 'YouTube'
+    sheet:
+      level:
+        level1: 'レベル1'
+        level2: 'レベル2'
+        level3: 'レベル3'
+        level4: 'レベル4'
+        level5: 'レベル5'

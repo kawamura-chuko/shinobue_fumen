@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-3">
         <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
-        <%= form.select :level, options_for_select(Sheet.types_of_selectable_levels, selected: level), {}, { class: 'form-control form-control-lg' } %>
+        <%= form.select :level, Sheet.levels_i18n.invert, { selected: level }, { class: 'form-control form-control-lg' } %>
       </div>
       <div class="col-1">
         <%= form.submit t('defaults.make_music'), class: 'btn btn-primary btn-lg' %>

@@ -8,7 +8,7 @@ class SheetsController < ApplicationController
   def new
     @sheet = Sheet.new(level_params)
     @sheet[:title] = t('defaults.untitled')
-    @sheet[:comma_joined_mml] = @sheet.make_music(@sheet[:level])
+    @sheet[:comma_joined_mml] = @sheet.make_music(Sheet.levels[@sheet.level])
   end
 
   def show
