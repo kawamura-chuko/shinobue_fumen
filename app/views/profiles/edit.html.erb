@@ -10,6 +10,7 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control mb-3' %>
 
+        <%= render 'shared/error_messages', object: f.object %>
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
     </div>
