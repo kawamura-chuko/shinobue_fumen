@@ -53,7 +53,7 @@
       <% @sheets.reverse_each do |sheet| %>
         <tr>
           <td><%= link_to sheet.title, sheet %></td>
-          <td><%= sheet.level %></td>
+          <td><%= sheet.level_i18n %></td>
           <td>
             <%= sheet.comments.count %>
             <% if sheet.comments.exists?(embed_type: 'youtube') %>
