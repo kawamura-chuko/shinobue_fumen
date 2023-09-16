@@ -5,7 +5,7 @@ RSpec.describe "Sheets", type: :system do
   let(:sheet) { create(:sheet, user: user) }
 
   describe 'ログイン前' do
-    context 'トップページから譜面作成' do
+    context 'トップページから譜面作成(レベル1指定)' do
       it 'レベル1の譜面が表示される' do
         visit root_path
         select 'レベル1', from: 'level'
@@ -16,6 +16,9 @@ RSpec.describe "Sheets", type: :system do
         expect(page).to have_no_button '登録する'
         expect(current_path).to eq new_sheet_path
       end
+    end
+
+    context 'トップページから譜面作成(レベル5指定)' do
       it 'レベル5の譜面が表示される' do
         visit root_path
         select 'レベル5', from: 'level'
@@ -28,7 +31,7 @@ RSpec.describe "Sheets", type: :system do
       end
     end
 
-    context '譜面表示から再度曲を作成' do
+    context '譜面表示から再度曲を作成(レベル1指定)' do
       it 'レベル1の譜面が表示される' do
         visit root_path
         select 'レベル5', from: 'level'
@@ -41,7 +44,9 @@ RSpec.describe "Sheets", type: :system do
         expect(page).to have_no_button '登録する'
         expect(current_path).to eq new_sheet_path
       end
+    end
 
+    context '譜面表示から再度曲を作成(レベル5指定)' do
       it 'レベル5の譜面が表示される' do
         visit root_path
         select 'レベル1', from: 'level'
@@ -75,7 +80,7 @@ RSpec.describe "Sheets", type: :system do
   describe 'ログイン後' do
     before { login_as(user) }
 
-    context 'トップページから譜面作成' do
+    context 'トップページから譜面作成(レベル1指定)' do
       it 'レベル1の譜面が表示される' do
         visit root_path
         select 'レベル1', from: 'level'
@@ -86,15 +91,17 @@ RSpec.describe "Sheets", type: :system do
         expect(page).to have_button '登録する'
         expect(current_path).to eq new_sheet_path
       end
+    end
 
-      it 'タイトルを付けて譜面を保存する' do
+    context 'トップページから譜面(レベル5)作成後にタイトルを付けて譜面を保存する' do
+      it '譜面を保存できる' do
         visit root_path
         select 'レベル5', from: 'level'
         click_button '曲を作成する'
         fill_in 'タイトル', with: '曲のタイトル'
         click_button '登録する'
 
-        expect(page).to have_content('作成しました')
+        expect(page).to have_content('譜面を保存しました')
         expect(page).to have_content '曲のタイトル(レベル5)'
         expect(page).to have_select('level', selected: 'レベル5')
         expect(page).to have_content('コメント')
@@ -107,15 +114,29 @@ RSpec.describe "Sheets", type: :system do
       end
     end
 
-    context '保存済みの譜面を表示する' do
-      let!(:other_user) { create(:user, email: "other_user@example.com") }
-      let!(:other_sheet) { create(:sheet, user: other_user) }
-      it '自分が保存した譜面はタイトルを変更できる' do
+    context 'トップページから譜面(レベル5)作成後にタイトル未記入で譜面を保存する' do
+      it '譜面を保存できない' do
+        visit root_path
+        select 'レベル5', from: 'level'
+        click_button '曲を作成する'
+        fill_in 'タイトル', with: ''
+        click_button '登録する'
+
+        expect(page).to have_content('譜面を保存できませんでした(タイトルを入力してください)')
+        expect(page).to have_content '無題(レベル5)'
+        expect(page).to have_select('level', selected: 'レベル5')
+        expect(page).to have_field 'タイトル', with: '無題'
+        expect(current_path).to eq sheets_path
+      end
+    end
+
+    context '自分が保存した譜面のタイトルを変更する' do
+      it 'タイトルを変更できる' do
         visit sheet_path(sheet)
         fill_in 'タイトル', with: '曲のタイトルを変更'
         click_button '更新する'
 
-        expect(page).to have_content('変更しました')
+        expect(page).to have_content('タイトルを更新しました')
         expect(page).to have_content '曲のタイトルを変更(レベル5)'
         expect(page).to have_select('level', selected: 'レベル5')
         expect(page).to have_content('コメント')
@@ -126,17 +147,43 @@ RSpec.describe "Sheets", type: :system do
         expect(page).to have_button '削除'
         expect(current_path).to eq sheet_path(sheet)
       end
+    end
 
-      it '自分が保存した譜面は削除できる' do
+    context '自分が保存した譜面のタイトルを未記入で更新する' do
+      it 'タイトルを更新できない' do
+        visit sheet_path(sheet)
+        fill_in 'タイトル', with: ''
+        click_button '更新する'
+
+        expect(page).to have_content('タイトルを更新できませんでした(タイトルを入力してください)')
+        expect(page).to have_content sheet.title + '(レベル5)'
+        expect(page).to have_select('level', selected: 'レベル5')
+        expect(page).to have_content('コメント')
+        expect(page).to have_select('埋め込みタイプ', selected: '無し')
+        expect(page).to have_field 'ID', with: ''
+        expect(page).to have_field 'タイトル', with: sheet.title
+        expect(page).to have_button '更新する'
+        expect(page).to have_button '削除'
+        expect(current_path).to eq sheet_path(sheet)
+      end
+    end
+
+    context '自分が保存した譜面を削除する' do
+      it '譜面を削除できる' do
         visit sheet_path(sheet)
         page.accept_confirm do
           click_button '削除'
         end
         expect(page).to have_content('削除しました')
+        expect(page).to have_no_content sheet.title
         expect(current_path).to eq sheets_path
       end
+    end
 
-      it '他人が保存した譜面は変更/削除できない' do
+    context '他人が保存した譜面を表示する' do
+      let!(:other_user) { create(:user, email: "other_user@example.com") }
+      let!(:other_sheet) { create(:sheet, user: other_user) }
+      it '変更ボタンと削除ボタンが表示されない' do
         visit sheet_path(other_sheet)
         expect(page).to have_content('コメント')
         expect(page).to have_select('埋め込みタイプ', selected: '無し')
