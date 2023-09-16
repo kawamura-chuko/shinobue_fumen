@@ -20,18 +20,19 @@ class SheetsController < ApplicationController
   def create
     @sheet = current_user.sheets.build(sheet_params)
     if @sheet.save
-      redirect_to @sheet, success: t('.success')
+      redirect_to @sheet, success: t('defaults.message.saved', item: Sheet.model_name.human)
     else
-      flash.now['danger'] = @sheet.errors.full_messages.join(', ')
+      flash.now['danger'] = t('defaults.message.not_saved', item: Sheet.model_name.human) + "(#{@sheet.errors.full_messages.join(', ')})"
+      @sheet[:title] = t('defaults.untitled')
       render :new
     end
   end
 
   def update
     if @sheet.update(sheet_params)
-      redirect_to @sheet, success: t('.success')
+      redirect_to @sheet, success: t('defaults.message.updated', item: Sheet.human_attribute_name(:title))
     else
-      redirect_to @sheet, danger: @sheet.errors.full_messages.join(', ')
+      redirect_to @sheet, danger: t('defaults.message.not_updated', item: Sheet.human_attribute_name(:title)) + "(#{@sheet.errors.full_messages.join(', ')})"
     end
   end
 
