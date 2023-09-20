@@ -1,11 +1,12 @@
 <div class="container">
+  <%= image_tag 'shinobue_etude.png', class: 'img-fluid' %>
   <%= form_with(url: new_sheet_path, method: :get) do |form| %>
-    <div class="row">
-      <div class="col-3">
+    <div class="d-flex py-5 justify-content-center">
+      <div class="px-1">
         <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
         <%= form.select :level, Sheet.levels_i18n.invert, { selected: level }, { class: 'form-control form-control-lg' } %>
       </div>
-      <div class="col-1">
+      <div class="px-1">
         <%= form.submit t('defaults.make_music'), class: 'btn btn-primary btn-lg' %>
       </div>
     </div>

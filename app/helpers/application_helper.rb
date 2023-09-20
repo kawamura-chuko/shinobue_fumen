@@ -10,7 +10,8 @@ module ApplicationHelper
       canonical: request.original_url,
       noindex: !Rails.env.production?,
       icon: [
-        { href: image_url('logo.png'), rel: 'apple-touch-icon', sizes: '180x180' }
+        { href: image_url('favicon.ico') },
+        { href: image_url('icon.png'), rel: 'apple-touch-icon', sizes: '180x180' }
       ],
       og: {
         site_name: 'shinobue-dx',
@@ -18,7 +19,7 @@ module ApplicationHelper
         description: '篠笛にピッタリな練習曲を、自動で作曲し数字譜に起こします。六本調子の篠笛とほぼ同じ音程で視聴できます。',
         type: 'website',
         url: request.original_url,
-        image: image_url('sheet.png'),
+        image: image_url('shinobue_etude.png'),
         locale: 'ja_JP'
       },
       twitter: {
