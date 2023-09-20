@@ -5,11 +5,11 @@
     <div>
       <button id="play-btn" type="button" class="btn btn-primary btn-lg bi bi-play-btn-fill"><%= t('defaults.play') %></button>
     </div>
-    <div>
+    <div class="px-1">
       <button id="stop-btn" type="button" class="btn btn-primary bi bi-stop-btn-fill"><%= t('defaults.stop') %></button>
     </div>
     <input type="hidden" id="sheet" value="<%= sheet.comma_joined_mml %>">
-    <div class="ms-auto">
+    <div class="ms-auto px-1">
       <% level = @sheet ? @sheet.level : Sheet::DEFAULT_LEVEL %>
       <%= form.select :level, Sheet.levels_i18n.invert, { selected: level }, { class: 'form-control form-control-lg' } %>
     </div>
