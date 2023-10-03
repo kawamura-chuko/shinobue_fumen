@@ -1,0 +1,36 @@
+  <%= form_with model: search_form, url: search_sheets_path, scope: :q, class: 'd-flex', method: :get do |f| %>
+    <%= f.search_field :title, id: 'search_field_of_sheet', class: 'form-control me-2', placeholder: 'タイトル' %>
+    <%= f.select :level, Sheet.levels_i18n.invert, { include_blank: 'レベル' }, { class: 'form-control me-2' } %>
+    <%= f.search_field :comment_body, id: 'search_field_of_comment', class: 'form-control me-2', placeholder: 'コメント' %>
+    <%= f.select :comment_embed, Comment.embed_types_i18n.invert, { include_blank: 'コメントの動画' }, class: 'form-control me-2' %>
+    <%= f.search_field :username, id: 'search_field_of_user', class: 'form-control me-2', placeholder: 'ユーザー' %>
+    <%= f.submit (t 'defaults.search'), class: 'btn btn-primary' %>
+  <% end %>
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th scope="col"><%= t('sheets.index.etude_list') %></th>
+        <th scope="col"><%= Sheet.human_attribute_name(:level) %></th>
+        <th scope="col"><%= t('defaults.comment_count') %></th>
+        <th scope="col"><%= User.human_attribute_name(:name) %></th>
+        <th scope="col"><%= Sheet.human_attribute_name(:created_at) %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% sheets.reverse_each do |sheet| %>
+        <tr>
+          <td><%= link_to sheet.title, sheet %></td>
+          <td><%= sheet.level_i18n %></td>
+          <td>
+            <%= sheet.comments.count %>
+            <% if sheet.comments.exists?(embed_type: 'youtube') %>
+              <i class="text-danger bi bi-youtube"></i>
+            <% end %>
+          </td>
+          <td><%= sheet.user.name %></td>
+          <td><%= sheet.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -9,6 +9,7 @@ ja:
     show: '詳細'
     edit: '編集'
     delete: '削除'
+    search: '検索'
     audition: '試聴する'
     play: '再生'
     stop: '停止'
