@@ -39,32 +39,5 @@
       </li>
     </ul>
   </div>
-  <table class="table">
-    <thead class="table-light">
-      <tr>
-        <th scope="col"><%= t('.etude_list') %></th>
-        <th scope="col"><%= Sheet.human_attribute_name(:level) %></th>
-        <th scope="col"><%= t('defaults.comment_count') %></th>
-        <th scope="col"><%= User.human_attribute_name(:name) %></th>
-        <th scope="col"><%= Sheet.human_attribute_name(:created_at) %></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @sheets.reverse_each do |sheet| %>
-        <tr>
-          <td><%= link_to sheet.title, sheet %></td>
-          <td><%= sheet.level_i18n %></td>
-          <td>
-            <%= sheet.comments.count %>
-            <% if sheet.comments.exists?(embed_type: 'youtube') %>
-              <i class="text-danger bi bi-youtube"></i>
-            <% end %>
-          </td>
-          <td><%= sheet.user.name %></td>
-          <td><%= sheet.created_at.strftime('%Y/%m/%d') %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render 'etude', {sheets: @sheets, search_form: @search_form} %>
 </div>

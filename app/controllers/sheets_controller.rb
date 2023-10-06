@@ -41,6 +41,11 @@ class SheetsController < ApplicationController
     redirect_to sheets_path, success: t('.success')
   end
 
+  def search
+    @search_form = SearchSheetsForm.new(search_sheet_params)
+    @sheets = @search_form.search.includes(:user)
+  end
+
   private
 
   def level_params
@@ -53,5 +58,9 @@ class SheetsController < ApplicationController
 
   def sheet_params
     params.require(:sheet).permit(:title, :level, :comma_joined_mml)
+  end
+
+  def search_sheet_params
+    params[:q]&.permit(:title, :level, :comment_body, :comment_embed, :username)
   end
 end

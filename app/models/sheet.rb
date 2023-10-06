@@ -7,6 +7,12 @@ class Sheet < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+  scope :title_contain, ->(word) { where('title LIKE ?', "%#{word}%") }
+  scope :level_contain, ->(level) { where(level:) }
+  scope :comment_body_contain, ->(word) { joins(:comments).where('comments.body LIKE ?', "%#{word}%") }
+  scope :comment_embed_contain, ->(embed) { joins(:comments).where(comments: { embed_type: embed }) }
+  scope :username_contain, ->(word) { joins(:user).where('name LIKE ?', "%#{word}%") }
+
   enum level: { level1: 1, level2: 2, level3: 3, level4: 4, level5: 5 }
 
   DEFAULT_LEVEL_VALUE = 2
