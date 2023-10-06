@@ -215,4 +215,106 @@ RSpec.describe "Sheets", type: :system do
       end
     end
   end
+
+  describe '検索機能' do
+    let!(:user1) { create(:user, email: "user1@example.com", name: "伊藤") }
+    let!(:user2) { create(:user, email: "user2@example.com", name: "鈴木") }
+    let!(:sheet1) { create(:sheet, user: user1, title: "雨にも負けず") }
+    let!(:comment1_1) { create(:comment, user: user1, sheet: sheet1) }
+    let!(:comment1_2) { create(:comment, user: user1, sheet: sheet1) }
+    let!(:comment1_3) { create(:comment, user: user2, sheet: sheet1, body: "ちょっと退屈") }
+    let!(:sheet2) { create(:sheet, user: user2, level: 'level1', title: "アメニモマケズ") }
+    let!(:comment2_2) { create(:comment, user: user2, sheet: sheet2, embed_type: 'youtube', identifier: 'https://www.youtube.com/watch?v=ABCDEFGHIJK', body: "素晴らしい！") }
+
+    it '登録曲一覧画面からタイトルで絞り込み検索ができること' do
+      visit root_path
+      fill_in 'search_field_of_sheet', with: '雨'
+      click_button '検索'
+      expect(page).to have_content(sheet1.title)
+      expect(page).not_to have_content(sheet2.title)
+      expect(page).to have_field 'search_field_of_sheet', with: '雨'
+      expect(current_path).to eq search_sheets_path
+    end
+    it '検索結果画面からタイトルで絞り込み検索ができること' do
+      visit search_sheets_path
+      fill_in 'search_field_of_sheet', with: 'アメ'
+      click_button '検索'
+      expect(page).not_to have_content(sheet1.title)
+      expect(page).to have_content(sheet2.title)
+      expect(page).to have_field 'search_field_of_sheet', with: 'アメ'
+      expect(current_path).to eq search_sheets_path
+    end
+    it '登録曲一覧画面からレベルで絞り込み検索ができること' do
+      visit root_path
+      select 'レベル5', from: 'search_level'
+      click_button '検索'
+      expect(page).to have_content(sheet1.title)
+      expect(page).not_to have_content(sheet2.title)
+      expect(page).to have_select('search_level', selected: 'レベル5')
+      expect(current_path).to eq search_sheets_path
+    end
+    it '検索結果画面からレベルで絞り込み検索ができること' do
+      visit search_sheets_path
+      select 'レベル1', from: 'search_level'
+      click_button '検索'
+      expect(page).not_to have_content(sheet1.title)
+      expect(page).to have_content(sheet2.title)
+      expect(page).to have_select('search_level', selected: 'レベル1')
+      expect(current_path).to eq search_sheets_path
+    end
+    it '登録曲一覧画面からコメントで絞り込み検索ができること' do
+      visit root_path
+      fill_in 'search_field_of_comment', with: '退屈'
+      click_button '検索'
+      expect(page).to have_content(sheet1.title)
+      expect(page).not_to have_content(sheet2.title)
+      expect(page).to have_field 'search_field_of_comment', with: '退屈'
+      expect(current_path).to eq search_sheets_path
+    end
+    it '検索結果画面からコメントで絞り込み検索ができること' do
+      visit search_sheets_path
+      fill_in 'search_field_of_comment', with: '！'
+      click_button '検索'
+      expect(page).not_to have_content(sheet1.title)
+      expect(page).to have_content(sheet2.title)
+      expect(page).to have_field 'search_field_of_comment', with: '！'
+      expect(current_path).to eq search_sheets_path
+    end
+    it '登録曲一覧画面からコメントの動画で絞り込み検索ができること' do
+      visit root_path
+      select '無し', from: 'search_embed'
+      click_button '検索'
+      expect(page).to have_content(sheet1.title)
+      expect(page).not_to have_content(sheet2.title)
+      expect(page).to have_select('search_embed', selected: '無し')
+      expect(current_path).to eq search_sheets_path
+    end
+    it '検索結果画面からコメントの動画で絞り込み検索ができること' do
+      visit search_sheets_path
+      select 'YouTube', from: 'search_embed'
+      click_button '検索'
+      expect(page).not_to have_content(sheet1.title)
+      expect(page).to have_content(sheet2.title)
+      expect(page).to have_select('search_embed', selected: 'YouTube')
+      expect(current_path).to eq search_sheets_path
+    end
+    it '登録曲一覧画面からユーザーで絞り込み検索ができること' do
+      visit root_path
+      fill_in 'search_field_of_user', with: '伊藤'
+      click_button '検索'
+      expect(page).to have_content(sheet1.user.name)
+      expect(page).not_to have_content(sheet2.user.name)
+      expect(page).to have_field 'search_field_of_user', with: '伊藤'
+      expect(current_path).to eq search_sheets_path
+    end
+    it '検索結果画面からユーザーで絞り込み検索ができること' do
+      visit search_sheets_path
+      fill_in 'search_field_of_user', with: '鈴木'
+      click_button '検索'
+      expect(page).not_to have_content(sheet1.user.name)
+      expect(page).to have_content(sheet2.user.name)
+      expect(page).to have_field 'search_field_of_user', with: '鈴木'
+      expect(current_path).to eq search_sheets_path
+    end
+  end
 end
