@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1><%= t '.title' %></h1>
+      <%= form_with model: @sheet, url: admin_sheet_path(@sheet), local: true do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :level %>
+          <%= f.select :level, Sheet.levels_i18n.invert, {}, { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comma_joined_mml %>
+          <%= f.text_area :comma_joined_mml, class: 'form-control' %>
+        </div>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

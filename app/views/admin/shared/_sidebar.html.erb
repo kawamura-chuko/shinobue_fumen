@@ -1,0 +1,35 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="info">
+        <%= t('defaults.login') %>: <%= current_user.name %>
+      </div>
+    </div>
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <%= link_to admin_users_path, class: "nav-link #{active_if('admin/users')}" do %>
+            <p>
+              <%= t('admin.users.index.title') %>
+            </p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_sheets_path, class: "nav-link #{active_if('admin/sheets')}" do %>
+            <p>
+              <%= t('admin.sheets.index.title') %>
+            </p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_comments_path, class: "nav-link #{active_if('admin/comments')}" do %>
+            <p>
+              <%= t('admin.comments.index.title') %>
+            </p>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>

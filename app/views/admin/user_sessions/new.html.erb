@@ -1,0 +1,31 @@
+<div class="container login-box">
+  <div class="login-logo">
+    <div class="text-center mt-5">
+      <h1><%= t('.title') %></h1>
+    </div>
+  </div>
+  <div class="card col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+    <div class="card-body login-card-body">
+
+      <%= form_with url: admin_login_path, local: true do |f| %>
+        <%= f.label :email, User.human_attribute_name(:email) %>
+        <div class="input-group mb-3">
+          <%= f.text_field :email, class: 'form-control', placeholder: :email %>
+        </div>
+
+        <%= f.label :password, User.human_attribute_name(:password) %>
+        <div class="input-group mb-3">
+          <%= f.password_field :password, class: 'form-control', placeholder: :password %>
+          <div class="input-group-append">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <%= f.submit (t 'defaults.login'), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

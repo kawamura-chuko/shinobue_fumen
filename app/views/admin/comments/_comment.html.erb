@@ -1,0 +1,28 @@
+<tr>
+  <td>
+    <%= comment.id %>
+  </td>
+  <td>
+    <%= comment.body[...20] %>
+  </td>
+  <td>
+    <%= comment.embed_type_i18n %>
+  </td>
+  <td>
+    <%= comment.sheet.title %>
+  </td>
+  <td>
+    <%= comment.user.name %>
+  </td>
+  <td>
+    <%= l comment.created_at, format: :long %>
+  </td>
+  <td>
+    <div class="d-flex">
+      <%= button_to t('defaults.show'), admin_comment_path(comment), method: :get, class: 'btn btn-info mr-1' %>
+      <%= button_to t('defaults.edit'), edit_admin_comment_path(comment), method: :get, class: 'btn btn-success mr-1' %>
+      <% msg = t('defaults.message.delete_confirm') %>
+      <%= button_to t('defaults.delete'), admin_comment_path(comment), method: :delete, class: 'btn btn-danger', form: { onSubmit: "return check('#{msg}')" } %>
+    </div>
+  </td>
+</tr>

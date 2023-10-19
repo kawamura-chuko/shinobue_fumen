@@ -28,4 +28,8 @@ module ApplicationHelper
       }
     }
   end
+
+  def active_if(path)
+    path == controller_path ? 'active' : ''
+  end
 end

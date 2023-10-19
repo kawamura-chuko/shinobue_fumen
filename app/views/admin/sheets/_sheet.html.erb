@@ -1,0 +1,25 @@
+<tr>
+  <td><%= sheet.id %></td>
+  <td><%= sheet.title %></td>
+  <td><%= sheet.level_i18n %></td>
+  <td>
+    <%= @comment_counts[sheet.id] %>
+    <% if @comment_youtube[sheet.id] %>
+      <i class="text-danger bi bi-youtube"></i>
+    <% end %>
+  </td>
+  <td>
+    <%= sheet.user.name %>
+  </td>
+  <td>
+    <%= l sheet.created_at, format: :long %>
+  </td>
+  <td>
+    <div class="d-flex">
+      <%= button_to t('defaults.show'), admin_sheet_path(sheet), method: :get, class: 'btn btn-info mr-1' %>
+      <%= button_to t('defaults.edit'), edit_admin_sheet_path(sheet), method: :get, class: 'btn btn-success mr-1' %>
+      <% msg = t('defaults.message.delete_confirm') %>
+      <%= button_to t('defaults.delete'), admin_sheet_path(sheet), method: :delete, class: 'btn btn-danger', form: { onSubmit: "return check('#{msg}')" } %>
+    </div>
+  </td>
+</tr>

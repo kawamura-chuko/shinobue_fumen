@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1><%= t('.title') %></h1>
+      <div class="text-right mb-3">
+        <div class="d-flex justify-content-end">
+          <%= button_to t('defaults.edit'), edit_admin_sheet_path(@sheet), method: :get, class: 'btn btn-success mr-1' %>
+          <% msg = t('defaults.message.delete_confirm') %>
+          <%= button_to t('defaults.delete'), admin_sheet_path(@sheet), method: :delete, class: 'btn btn-danger', form: { onSubmit: "return check('#{msg}')" } %>
+        </div>
+      </div>
+      <table class="table table-bordered bg-white">
+        <tr>
+          <th scope="row"><%= Sheet.human_attribute_name(:id) %></th>
+          <td><%= @sheet.id %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Sheet.human_attribute_name(:title) %></th>
+          <td><%= @sheet.title %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Sheet.human_attribute_name(:level) %></th>
+          <td><%= @sheet.level_i18n %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('defaults.mml') %></th>
+          <td><%= simple_format(@sheet.comma_joined_mml.gsub(',', "\n")) %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Sheet.human_attribute_name(:created_at) %></th>
+          <td><%= l @sheet.created_at, format: :long %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
