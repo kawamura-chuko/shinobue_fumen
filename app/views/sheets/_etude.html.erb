@@ -18,13 +18,13 @@
     </thead>
 
     <tbody>
-      <% sheets.reverse_each do |sheet| %>
+      <% sheets.each do |sheet| %>
         <tr>
           <td><%= link_to sheet.title, sheet %></td>
           <td><%= sheet.level_i18n %></td>
           <td>
-            <%= sheet.comments.count %>
-            <% if sheet.comments.exists?(embed_type: 'youtube') %>
+            <%= @comment_counts[sheet.id] %>
+            <% if @comment_youtube[sheet.id] %>
               <i class="text-danger bi bi-youtube"></i>
             <% end %>
           </td>

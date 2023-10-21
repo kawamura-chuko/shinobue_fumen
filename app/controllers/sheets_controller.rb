@@ -2,7 +2,13 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: %i[update destroy]
 
   def index
-    @sheets = Sheet.all
+    @sheets = Sheet.all.includes(:user, :comments).order(created_at: :desc)
+    @comment_counts = {}
+    @comment_youtube = {}
+    @sheets.each do |sheet|
+      @comment_counts[sheet.id] = sheet.comments.size
+      @comment_youtube[sheet.id] = sheet.comments.find(&:youtube?)
+    end
   end
 
   def new
@@ -43,7 +49,13 @@ class SheetsController < ApplicationController
 
   def search
     @search_form = SearchSheetsForm.new(search_sheet_params)
-    @sheets = @search_form.search.includes(:user)
+    @sheets = @search_form.search.includes(:user, :comments).order(created_at: :desc)
+    @comment_counts = {}
+    @comment_youtube = {}
+    @sheets.each do |sheet|
+      @comment_counts[sheet.id] = sheet.comments.size
+      @comment_youtube[sheet.id] = sheet.comments.find(&:youtube?)
+    end
   end
 
   private
