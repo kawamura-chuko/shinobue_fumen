@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1><%= t('.title') %></h1>
+      <div class="text-right mb-3">
+        <div class="d-flex justify-content-end">
+          <%= button_to t('defaults.edit'), edit_admin_comment_path(@comment), method: :get, class: 'btn btn-success mr-1' %>
+          <% msg = t('defaults.message.delete_confirm') %>
+          <%= button_to t('defaults.delete'), admin_comment_path(@comment), method: :delete, class: 'btn btn-danger', form: { onSubmit: "return check('#{msg}')" } %>
+        </div>
+      </div>
+      <table class="table table-bordered bg-white">
+        <tr>
+          <th scope="row"><%= Comment.human_attribute_name(:id) %></th>
+          <td><%= @comment.id %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Comment.human_attribute_name(:body) %></th>
+          <td><%= simple_format(@comment.body) %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Comment.human_attribute_name(:embed_type) %></th>
+          <td><%= @comment.embed_type_i18n %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('defaults.embedded_content') %></th>
+          <td>
+            <% if @comment.youtube? && @comment.identifier.present? %>
+              <div class="ratio ratio-16x9" style="max-width: 560px;">
+                <iframe src='https://www.youtube.com/embed/<%= "#{@comment.split_id_from_youtube_url}" %>' allowfullscreen></iframe>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Sheet.model_name.human %></th>
+          <td><%= simple_format(@comment.sheet.title) %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= User.human_attribute_name(:name) %></th>
+          <td><%= simple_format(@comment.user.name) %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= Comment.human_attribute_name(:created_at) %></th>
+          <td><%= l @comment.created_at, format: :long %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

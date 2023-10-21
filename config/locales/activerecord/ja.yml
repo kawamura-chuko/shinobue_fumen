@@ -10,10 +10,12 @@ ja:
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
         name: '名前'
+        role: '権限'
       sheet:
         title: 'タイトル'
         user: '投稿者'
         level: 'レベル'
+        comma_joined_mml: 'MML(カンマ結合)'
         created_at: '作成日時'
         updated_at: '更新日時'
       comment:
@@ -32,3 +34,11 @@ ja:
         level3: 'レベル3'
         level4: 'レベル4'
         level5: 'レベル5'
+    user:
+      role:
+        general: '一般'
+        admin: '管理者'
+  attributes:
+    id: 'ID'
+    created_at: '作成日時'
+    updated_at: '更新日時'

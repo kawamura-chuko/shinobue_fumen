@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :sheets, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  enum role: { general: 0, admin: 1 }
+
   def own?(object)
     id == object.user_id
   end

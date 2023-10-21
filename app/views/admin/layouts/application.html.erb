@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta lang='ja'>
+  <meta name="robots" content="noindex, nofollow">
+  <title>【管理画面】<%= t('defaults.service_name') %></title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application" %>
+  <%= display_meta_tags(default_meta_tags) %>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <%= render 'admin/shared/header' %>
+    <div class="row">
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <%= render 'admin/shared/sidebar' %>
+      </nav>
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+        <div class="content-wrapper">
+          <%= render 'shared/flash_message' %>
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+    <%= render 'admin/shared/footer' %>
+  </div>
+</body>
+
+<script>
+  function check(msg){
+    if(window.confirm(msg)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+</script>
+</html>

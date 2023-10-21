@@ -1,0 +1,23 @@
+<tr>
+  <td>
+    <%= user.id %>
+  </td>
+  <td>
+    <%= user.name %>
+  </td>
+  <td>
+    <%= user.role_i18n %>
+  </td>
+  <td>
+    <%= l user.created_at, format: :long %>
+  </td>
+  <td>
+    <div class="d-flex">
+    <%= button_to t('defaults.show'), admin_user_path(user), method: :get, class: 'btn btn-info mr-1' %>
+    <%= button_to t('defaults.edit'), edit_admin_user_path(user), method: :get, class: 'btn btn-success mr-1' %>
+    <% msg = t('defaults.message.delete_confirm') %>
+    <%= button_to t('defaults.delete'), admin_user_path(user), method: :delete, class: 'btn btn-danger', form: { onSubmit: "return check('#{msg}')" } %>
+    </div>
+  </td>
+</tr>
+

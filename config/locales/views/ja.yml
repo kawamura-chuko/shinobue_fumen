@@ -24,6 +24,8 @@ ja:
     privacy_policy: 'プライバシーポリシー'
     contact_us: 'お問合せフォーム'
     comment_count: 'コメント数'
+    embedded_content: '埋め込みコンテンツ'
+    mml: 'MML'
     message:
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
@@ -72,3 +74,38 @@ ja:
       title: '登録情報'
     edit:
       title: '登録情報編集'
+
+  admin:
+    admin_screen: '管理画面'
+    user_sessions:
+      new:
+        title: 'ログイン'
+      create:
+        success: 'ログインしました'
+        fail: 'ログインに失敗しました'
+      destroy:
+        success: 'ログアウトしました'
+    dashboards:
+      index:
+        title: 'ダッシュボード'
+    users:
+      index:
+        title: 'ユーザー一覧'
+      edit:
+        title: 'ユーザー編集'
+      show:
+        title: 'ユーザー詳細'
+    sheets:
+      index:
+        title: '譜面一覧'
+      edit:
+        title: '譜面編集'
+      show:
+        title: '譜面詳細'
+    comments:
+      index:
+        title: 'コメント一覧'
+      edit:
+        title: 'コメント編集'
+      show:
+        title: 'コメント詳細'

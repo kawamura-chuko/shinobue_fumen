@@ -1,0 +1,19 @@
+<div class="container">
+  <h1><%= t('.title') %></h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"><%= Comment.human_attribute_name(:id) %></th>
+        <th scope="col"><%= Comment.human_attribute_name(:body) %></th>
+        <th scope="col"><%= Comment.human_attribute_name(:embed_type) %></th>
+        <th scope="col"><%= Sheet.model_name.human %></th>
+        <th scope="col"><%= User.human_attribute_name(:name) %></th>
+        <th scope="col"><%= Comment.human_attribute_name(:created_at) %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @comments %>
+    </tbody>
+  </table>
+</div>
