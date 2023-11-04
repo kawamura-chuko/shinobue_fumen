@@ -47,6 +47,7 @@ group :development, :test do
   gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'letter_opener_web'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
@@ -65,7 +66,9 @@ group :development do
   # gem "spring"
 end
 
+gem 'config'
 gem 'cssbundling-rails', '~> 1.1'
+gem 'dotenv-rails'
 gem 'enum_help'
 gem 'draper'
 gem 'high_voltage'
